@@ -1,0 +1,9 @@
+#CUTRUN
+#narrowpeaks
+ macs2 callpeak -B -t ~/Dropbox\ \(VU\ Basic\ Sciences\)/Hiebert_lab/Results/4617-MB_CutandRun/4617-MB-5.hg19.32020.sorted.F4q10.bam -f BAMPE -g hs -q 0.05 --SPMR --call-summits -n 4617-Kas-flag-minusdT.A.BAMPE.SPMR.q0.05.callsummits
+
+macs2 callpeak -B -t ~/Dropbox\ \(VU\ Basic\ Sciences\)/Hiebert_lab/Results/4617-MB_CutandRun/4617-MB-6.hg19.32120.sorted.F4q10.bam -f BAMPE -g hs -q 0.05 --SPMR --call-summits -n 4617-Kas-flag-minusdT.B.BAMPE.SPMR.q0.05.callsummits
+
+macs2 callpeak -B -t ~/Dropbox\ \(VU\ Basic\ Sciences\)/Hiebert_lab/Results/4617-MB_CutandRun/4617-MB-7.hg19.sorted.F4q10.bam -f BAMPE -g hs -q 0.05 --SPMR --call-summits -n 4617-Kas-flag-plusdT.A.BAMPE.SPMR.q0.05.callsummits
+
+macs2 callpeak -B -t ~/Dropbox\ \(VU\ Basic\ Sciences\)/Hiebert_lab/Results/4617-MB_CutandRun/4617-MB-8.hg19.sorted.F4q10.bam -f BAMPE -g hs -q 0.05 --SPMR --call-summits -n 4617-Kas-flag-plusdT.B.BAMPE.SPMR.q0.05.callsummits
