@@ -4,17 +4,13 @@ To Analyze Cut and run from start to finish I have used both python/anaconda bas
 install macs2 via conda into conda environment: https://anaconda.org/bioconda/macs2
 `conda install -c bioconda macs2` 
 
-install Diffbind and DESeq2 into R consule or R studio 
+install Bioconductor, Diffbind and DESeq2 into R consule or R studio 
 Refer to these links for their manuals: https://bioconductor.org/packages/release/bioc/html/DiffBind.html
 Refer to these links for their manuals: https://bioconductor.org/packages/release/bioc/html/DESeq2.html
 
 `if (!requireNamespace("BiocManager", quietly = TRUE))
-    install.packages("BiocManager")
+    install.packages("BiocManager")`
+    
+`BiocManager::install("DiffBind")`
 
-BiocManager::install("DiffBind")`
-
-
-`if (!requireNamespace("BiocManager", quietly = TRUE))
-    install.packages("BiocManager")
-
-BiocManager::install("DESeq2")`
+`BiocManager::install("DESeq2")`
