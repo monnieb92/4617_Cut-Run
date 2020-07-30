@@ -1,0 +1,87 @@
+#import cutandrun with name ids you want, conditions, bam files, narrowpeaks files q-value 0.05
+
+CutandRunqv05 <- data.frame(SampleID=c("minusdTAG_A","minusdTAG_B","plusdTAG_A","plusdTAG_B"),Condition=c("minusdTAG","minusdTAG","plusdTAG","plusdTAG"),bamReads=c("minusdTA.hg19.sorted.F4q10.bam","minusdTB.hg19.sorted.F4q10.bam","plusdTA.hg19.sorted.F4q10.bam","plusdTB.hg19.sorted.F4q10.bam"),
+                            Peaks=c("minusdTA.narrowPeak","minusdTB.narrowPeak","plusdTA.narrowPeak","plusdTB.narrowPeak"),PeakCaller="narrow")
+#create matrix of the peaks  
+
+S5cutandrun <-dba(sampleSheet = CutandRunqv05)
+S5cutandrun
+
+#count the reads at each peak
+
+S5cutandrun <- dba.count(S5cutandrun,score = DBA_SCORE_READS)
+
+#plot the correlation heatmap of the clustered the samples 
+
+plot(S5cutandrun)
+
+#Create a function of the peaks called, their IDs and locations then save as a csv file that can later be made into a bed file or peak file for HOMER annotation analysis  
+
+peakinfo_cutandrun <-dba.peakset(S5cutandrun, bRetrieve = T, DataType = DBA_DATA_FRAME)
+
+write.csv(peakinfo_cutandrun, file="namePeakID.csv")
+
+#import DESeq2 for differential analysis
+library(DESeq2)
+
+S5cutandrun_se <-dba(S5cutandrun, bSummarizedExperiment = TRUE)
+
+countdata_cutandrun <- assay(S5cutandrun_se)
+
+head(countdata_cutandrun)
+
+coldata <- colData(S5cutandrun_se)
+
+rownames(coldata) <- coldata$run
+
+colnames(countdata_cutandrun) <- coldata$run
+
+head(coldata)
+
+dds_cutandrun <- DESeqDataSetFromMatrix(countData = countdata_cutandrun, colData = coldata, design=~Condition)
+
+dds_cutandrun
+
+#override the normalization factors 
+
+sf <- c(0.9433,1.069,0.5977,0.7016)
+
+sizeFactors(dds_cutandrun) <- sf
+
+dds_cutandrun <- estimateDispersions(dds_cutandrun)
+
+dds_cutandrun <- nbinomWaldTest(dds_cutandrun)
+
+results_cutandrun <- results(dds_cutandrun)
+
+results_cutandrun
+
+plotMA(results_cutandrun)
+
+#Created a new MA plot with adjusted y axis 
+plotMA(results_cutandrun, ylim=c(-4,4))
+
+#Create the a results csv file, this only contains peak IDs, you have to use Vlookup or leftbind 
+write.csv(as.data.frame(results_cutandrun), file = "filenamePeakdifferential.csv")
+
+#combine csv files
+CRpeakinfo <- read.csv("PeakIDs.csv")
+head(CRpeakinfo)
+
+CRdifpeaks <- read.csv("Peakdifferential.csv")
+head(CRdifpeaks)
+
+#merge by peakinfo(X) and filter anything with a pvalue less than 0.05, determine fold change by 2^absolutevalue(Log2foldchange), then again filtering on fold change > 1.5 fold
+
+library(dplyr)
+
+CRpeakpv0.05_peakdn1.5fld <- left_join(CRdifpeaks, CRpeakinfo, by = "X") %>%
+  filter(pvalue <= 0.05) %>%
+  mutate(FoldChange = (2^(abs(log2FoldChange)))) %>%
+  filter(FoldChange >= 1.5) %>%
+  filter(log2FoldChange < 0)
+
+glimpse(CRpeakpv0.05_peakdn1.5fld)
+
+write.csv(CRpeakpv0.05_peakdn1.5fld, file="NAME.peakdn1.5fld.csv")
+
