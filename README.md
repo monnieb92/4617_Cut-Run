@@ -8,6 +8,7 @@ install macs2 via conda into conda environment: https://anaconda.org/bioconda/ma
 install Bioconductor, Diffbind and DESeq2 into R consule or R studio 
 
 Refer to these links for their manuals: https://bioconductor.org/packages/release/bioc/html/DiffBind.html
+
 Refer to these links for their manuals: https://bioconductor.org/packages/release/bioc/html/DESeq2.html
 
 `if (!requireNamespace("BiocManager", quietly = TRUE))
