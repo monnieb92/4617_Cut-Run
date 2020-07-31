@@ -1,5 +1,5 @@
 # 4617_Cut-Run
-To Analyze Cut and run from start to finish I have used unix/linux systems (trimmomatic, bowtie2, samtools), python/anaconda based tools (macs2) as well as R-code based tools (Diffbind, DESeq2), so you will need to install both systems 
+To Analyze Cut and run from start to finish I have used unix/linux systems (trimmomatic, bowtie2, samtools), python/anaconda based tools (macs2) as well as R-code based tools (Diffbind, DESeq2), so you will need to install all of the systems below or if you have a "*.bam" file start with macs2 and then Diffbind,DESeq2 
 
 Trimmomatic: http://www.usadellab.org/cms/?page=trimmomatic
 
