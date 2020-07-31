@@ -2,7 +2,9 @@
 To Analyze Cut and run from start to finish I have used unix/linux systems (trimmomatic, bowtie2, samtools), python/anaconda based tools (macs2) as well as R-code based tools (Diffbind, DESeq2), so you will need to install both systems 
 
 Trimmomatic: http://www.usadellab.org/cms/?page=trimmomatic
+
 Bowtie2: http://bowtie-bio.sourceforge.net/bowtie2/manual.shtml
+
 Samtools: http://www.htslib.org
 
 
