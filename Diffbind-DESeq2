@@ -1,7 +1,7 @@
 #import cutandrun with name ids you want, conditions, bam files, narrowpeaks files q-value 0.05
 
-CutandRunqv05 <- data.frame(SampleID=c("minusdTAG_A","minusdTAG_B","plusdTAG_A","plusdTAG_B"),Condition=c("minusdTAG","minusdTAG","plusdTAG","plusdTAG"),bamReads=c("minusdTA.hg19.sorted.F4q10.bam","minusdTB.hg19.sorted.F4q10.bam","plusdTA.hg19.sorted.F4q10.bam","plusdTB.hg19.sorted.F4q10.bam"),
-                            Peaks=c("minusdTA.narrowPeak","minusdTB.narrowPeak","plusdTA.narrowPeak","plusdTB.narrowPeak"),PeakCaller="narrow")
+`CutandRunqv05 <- data.frame(SampleID=c("minusdTAG_A","minusdTAG_B","plusdTAG_A","plusdTAG_B"),Condition=c("minusdTAG","minusdTAG","plusdTAG","plusdTAG"),bamReads=c("minusdTA.hg19.sorted.F4q10.bam","minusdTB.hg19.sorted.F4q10.bam","plusdTA.hg19.sorted.F4q10.bam","plusdTB.hg19.sorted.F4q10.bam"),
+                            Peaks=c("minusdTA.narrowPeak","minusdTB.narrowPeak","plusdTA.narrowPeak","plusdTB.narrowPeak"),PeakCaller="narrow")`
 #create matrix of the peaks  
 
 S5cutandrun <-dba(sampleSheet = CutandRunqv05)
